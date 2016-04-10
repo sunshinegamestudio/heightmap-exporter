@@ -21,14 +21,16 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-        Box b = new Box(1, 1, 1);
-        Geometry geom = new Geometry("Box", b);
+        TerrainQuad(heightmap);
+        Image(grayscale/lumiance ???);
+        ImageRaster(image);
 
-        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        mat.setColor("Color", ColorRGBA.Blue);
-        geom.setMaterial(mat);
-
-        rootNode.attachChild(geom);
+        for (int y=0; y++; TerrainQuad.getLenght ()) {
+            for (int x=0; x++; TerrainQuad.getLenght () {
+                TerrainQuad.getHeight(x, y);
+                ImageRaster.setPixel();
+            }
+        }
     }
 
     @Override
