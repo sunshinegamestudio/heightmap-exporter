@@ -6,7 +6,11 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
+import com.jme3.terrain.geomipmap.TerrainQuad;
+import com.jme3.texture.Image;
+import com.jme3.texture.image.ImageRaster;
 
 /**
  * test
@@ -14,6 +18,13 @@ import com.jme3.scene.shape.Box;
  */
 public class Main extends SimpleApplication {
 
+    private Node terrain;
+    private TerrainQuad terrainQuad;
+    private String track;
+    
+    Image heightmap;
+    private ImageRaster imageRaster;
+    
     public static void main(String[] args) {
         Main app = new Main();
         app.start();
@@ -21,14 +32,18 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-        TerrainQuad(heightmap);
-        Image(grayscale/lumiance ???);
-        ImageRaster(image);
+        terrain = (Node) getAssetManager().loadModel("Tracks/" + track + "/Scenes/terrain_1.j3o");
+        terrainQuad = (TerrainQuad)terrain.getChild("terrain-terrain_1_node");
+        // terrainQuad.getHeightMap();
 
-        for (int y=0; y++; TerrainQuad.getLenght ()) {
-            for (int x=0; x++; TerrainQuad.getLenght () {
-                TerrainQuad.getHeight(x, y);
-                ImageRaster.setPixel();
+        heightmap = new Image();
+        // heightmap = new Image(grayscale/lumiance ???);
+        imageRaster = ImageRaster.create(heightmap);
+
+        for (int y=0; y++; terrainQuad.getLenght()) {
+            for (int x=0; x++; terrainQuad.getLenght()) {
+                terrainQuad.getHeight(x, y);
+                imageRaster.setPixel();
             }
         }
     }
