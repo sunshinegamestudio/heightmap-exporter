@@ -3,6 +3,7 @@ package heightmapexporter;
 import com.jme3.app.SimpleApplication;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
@@ -38,12 +39,14 @@ public class Main extends SimpleApplication {
 
         heightmap = new Image();
         // heightmap = new Image(grayscale/lumiance ???);
+        
         imageRaster = ImageRaster.create(heightmap);
 
-        for (int y=0; y++; terrainQuad.getLenght()) {
-            for (int x=0; x++; terrainQuad.getLenght()) {
-                terrainQuad.getHeight(x, y);
-                imageRaster.setPixel();
+        float height;
+        for(int y=0; y<terrainQuad.getTerrainSize(); y++) {
+            for(int x=0; x<terrainQuad.getTerrainSize(); x++) {
+                height = terrainQuad.getHeight(new Vector2f(x, y));
+                imageRaster.setPixel(x, y, new ColorRGBA(height, 0, 0, 0));
             }
         }
     }
