@@ -12,6 +12,8 @@ import com.jme3.scene.shape.Box;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.texture.Image;
 import com.jme3.texture.image.ImageRaster;
+import com.jme3.util.BufferUtils;
+import java.nio.ByteBuffer;
 
 /**
  * test
@@ -38,6 +40,10 @@ public class Main extends SimpleApplication {
         // terrainQuad.getHeightMap();
 
         heightmap = new Image();
+        // int width = image.getWidth();
+        // int height = image.getHeight();
+        // ByteBuffer data = BufferUtils.createByteBuffer( (int)Math.ceil(newFormat.getBitsPerPixel() / 8.0) * width * height);
+        // Image convertedImage = new Image(newFormat, width, height, data,null, image.getColorSpace());
         // heightmap = new Image(grayscale/lumiance ???);
         
         imageRaster = ImageRaster.create(heightmap);
