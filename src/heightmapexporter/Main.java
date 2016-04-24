@@ -11,6 +11,8 @@ import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.texture.Image;
+import com.jme3.texture.Image.Format;
+import static com.jme3.texture.Image.Format.Luminance8;
 import com.jme3.texture.image.ImageRaster;
 import com.jme3.util.BufferUtils;
 import java.nio.ByteBuffer;
@@ -39,20 +41,19 @@ public class Main extends SimpleApplication {
         terrainQuad = (TerrainQuad)terrain.getChild("terrain-terrain_1_node");
         // terrainQuad.getHeightMap();
 
-        heightmap = new Image();
-        // int width = image.getWidth();
-        // int height = image.getHeight();
-        // ByteBuffer data = BufferUtils.createByteBuffer( (int)Math.ceil(newFormat.getBitsPerPixel() / 8.0) * width * height);
-        // Image convertedImage = new Image(newFormat, width, height, data,null, image.getColorSpace());
-        // heightmap = new Image(grayscale/lumiance ???);
+        Format format = Luminance8;
+        int width = terrainQuad.getTerrainSize();
+        int height = terrainQuad.getTerrainSize();
+        ByteBuffer data = BufferUtils.createByteBuffer( (int)Math.ceil(format.getBitsPerPixel() / 8.0) * width * height);
+        heightmap = new Image(format, width, height, data,null, heightmap.getColorSpace());
         
         imageRaster = ImageRaster.create(heightmap);
 
-        float height;
+        float terrainheight;
         for(int y=0; y<terrainQuad.getTerrainSize(); y++) {
             for(int x=0; x<terrainQuad.getTerrainSize(); x++) {
-                height = terrainQuad.getHeight(new Vector2f(x, y));
-                imageRaster.setPixel(x, y, new ColorRGBA(height, 0, 0, 0));
+                terrainheight = terrainQuad.getHeight(new Vector2f(x, y));
+                imageRaster.setPixel(x, y, new ColorRGBA(terrainheight, 0, 0, 0));
             }
         }
     }
