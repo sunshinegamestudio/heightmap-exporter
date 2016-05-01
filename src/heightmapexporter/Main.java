@@ -15,7 +15,10 @@ import com.jme3.texture.Image.Format;
 import static com.jme3.texture.Image.Format.Luminance8;
 import com.jme3.texture.image.ImageRaster;
 import com.jme3.util.BufferUtils;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.nio.ByteBuffer;
+import javax.imageio.ImageIO;
 
 /**
  * test
@@ -56,6 +59,25 @@ public class Main extends SimpleApplication {
                 imageRaster.setPixel(x, y, new ColorRGBA(terrainheight, 0, 0, 0));
             }
         }
+        
+        /* Save image with ImageIO.
+        try { 
+            BufferedImage img = new BufferedImage( 500, 500, BufferedImage.TYPE_INT_RGB ); 
+            File f = new File("MyFile.png"); 
+            int r = 5; int g = 25; 
+            int b = 255; 
+            int col = (r << 16) | (g << 8) | b; 
+            for(int x = 0; x < 500; x++)    { 
+                for(int y = 20; y < 300; y++)   { 
+                    img.setRGB(x, y, col); 
+                } 
+            } 
+            ImageIO.write(img, "PNG", f);
+        } 
+        catch(Exception e)  {
+            e.printStackTrace();
+        }
+        */
     }
 
     @Override
