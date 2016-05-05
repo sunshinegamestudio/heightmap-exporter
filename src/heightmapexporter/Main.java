@@ -40,10 +40,28 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+        ReadHeightmap();
+        WriteHeightmapJme();
+        WriteHeightmapJava();
+    }
+
+    @Override
+    public void simpleUpdate(float tpf) {
+        //TODO: add update code
+    }
+
+    @Override
+    public void simpleRender(RenderManager rm) {
+        //TODO: add render code
+    }
+    
+    private void ReadHeightmap()    {
         terrain = (Node) getAssetManager().loadModel("Tracks/" + track + "/Scenes/terrain_1.j3o");
         terrainQuad = (TerrainQuad)terrain.getChild("terrain-terrain_1_node");
         // terrainQuad.getHeightMap();
-
+    }
+    
+    private void WriteHeightmapJme()    {
         Format format = Luminance8;
         int width = terrainQuad.getTerrainSize();
         int height = terrainQuad.getTerrainSize();
@@ -59,7 +77,9 @@ public class Main extends SimpleApplication {
                 imageRaster.setPixel(x, y, new ColorRGBA(terrainheight, 0, 0, 0));
             }
         }
-        
+    }
+    
+    private void WriteHeightmapJava()   {
         /* Save image with ImageIO.
         try { 
             BufferedImage img = new BufferedImage( 500, 500, BufferedImage.TYPE_INT_RGB ); 
@@ -78,15 +98,5 @@ public class Main extends SimpleApplication {
             e.printStackTrace();
         }
         */
-    }
-
-    @Override
-    public void simpleUpdate(float tpf) {
-        //TODO: add update code
-    }
-
-    @Override
-    public void simpleRender(RenderManager rm) {
-        //TODO: add render code
     }
 }
