@@ -30,6 +30,7 @@ public class Main extends SimpleApplication {
     private TerrainQuad terrainQuad;
     private String track;
     
+    String imageFile;
     Image heightmap;
     private ImageRaster imageRaster;
     
@@ -40,6 +41,9 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+        track = "Grass Hill";
+        imageFile = track;
+        
         ReadHeightmap();
         WriteHeightmapJme();
         WriteHeightmapJava();
@@ -71,8 +75,8 @@ public class Main extends SimpleApplication {
         imageRaster = ImageRaster.create(heightmap);
 
         float terrainheight;
-        for(int y=0; y<terrainQuad.getTerrainSize(); y++) {
-            for(int x=0; x<terrainQuad.getTerrainSize(); x++) {
+        for(int y=0; y<height; y++) {
+            for(int x=0; x<width; x++) {
                 terrainheight = terrainQuad.getHeight(new Vector2f(x, y));
                 imageRaster.setPixel(x, y, new ColorRGBA(terrainheight, 0, 0, 0));
             }
@@ -80,23 +84,25 @@ public class Main extends SimpleApplication {
     }
     
     private void WriteHeightmapJava()   {
-        /* Save image with ImageIO.
+        // Type type = BufferedImage.TYPE_BYTE_GRAY;
+        int width = terrainQuad.getTerrainSize();
+        int height = terrainQuad.getTerrainSize();
+
         try { 
-            BufferedImage img = new BufferedImage( 500, 500, BufferedImage.TYPE_INT_RGB ); 
-            File f = new File("MyFile.png"); 
-            int r = 5; int g = 25; 
-            int b = 255; 
-            int col = (r << 16) | (g << 8) | b; 
-            for(int x = 0; x < 500; x++)    { 
-                for(int y = 20; y < 300; y++)   { 
-                    img.setRGB(x, y, col); 
-                } 
-            } 
+            BufferedImage img = new BufferedImage( 500, 500, BufferedImage.TYPE_BYTE_GRAY ); 
+            File f = new File(imageFile + ".png"); 
+        
+            float terrainheight;
+            for(int y=0; y<height; y++) {
+                for(int x=0; x<width; x++) {
+                    terrainheight = terrainQuad.getHeight(new Vector2f(x, y));
+                    img.setRGB(x, y, (int) terrainheight); 
+                }
+            }
             ImageIO.write(img, "PNG", f);
-        } 
+        }
         catch(Exception e)  {
             e.printStackTrace();
         }
-        */
     }
 }
