@@ -60,7 +60,7 @@ public class Main extends SimpleApplication {
     }
     
     private void ReadHeightmap()    {
-        terrain = (Node) getAssetManager().loadModel("Tracks/" + track + "/Scenes/terrain_1.j3o");
+        terrain = (Node) getAssetManager().loadModel("Tracks/" + track + "/Terrains/terrain_1.j3o");
         terrainQuad = (TerrainQuad)terrain.getChild("terrain-terrain_1_node");
         // terrainQuad.getHeightMap();
     }
