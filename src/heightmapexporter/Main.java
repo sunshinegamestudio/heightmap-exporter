@@ -13,6 +13,7 @@ import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.texture.Image;
 import com.jme3.texture.Image.Format;
 import static com.jme3.texture.Image.Format.Luminance8;
+import static com.jme3.texture.image.ColorSpace.Linear;
 import com.jme3.texture.image.ImageRaster;
 import com.jme3.util.BufferUtils;
 import java.awt.image.BufferedImage;
@@ -60,7 +61,7 @@ public class Main extends SimpleApplication {
     }
     
     private void ReadHeightmap()    {
-        terrain = (Node) getAssetManager().loadModel("Tracks/" + track + "/Terrains/terrain_1.j3o");
+        terrain = (Node) getAssetManager().loadModel("Tracks/" + track + "/Terrains/terrain_1_node.j3o");
         terrainQuad = (TerrainQuad)terrain.getChild("terrain-terrain_1_node");
         // terrainQuad.getHeightMap();
     }
@@ -70,7 +71,7 @@ public class Main extends SimpleApplication {
         int width = terrainQuad.getTerrainSize();
         int height = terrainQuad.getTerrainSize();
         ByteBuffer data = BufferUtils.createByteBuffer( (int)Math.ceil(format.getBitsPerPixel() / 8.0) * width * height);
-        heightmap = new Image(format, width, height, data,null, heightmap.getColorSpace());
+        heightmap = new Image(format, width, height, data,null, Linear);
         
         imageRaster = ImageRaster.create(heightmap);
 
