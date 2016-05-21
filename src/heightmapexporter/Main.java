@@ -1,6 +1,7 @@
 package heightmapexporter;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
@@ -31,9 +32,11 @@ public class Main extends SimpleApplication {
     private TerrainQuad terrainQuad;
     private String track;
     
-    String imageFile;
-    Image heightmap;
+    private String imageFile;
+    private Image heightmap;
     private ImageRaster imageRaster;
+    
+    private DirectionalLight sun;
     
     public static void main(String[] args) {
         Main app = new Main();
@@ -42,6 +45,8 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+        // getFlyByCamera();
+        
         track = "Grass Hill";
         imageFile = track;
         
@@ -64,6 +69,11 @@ public class Main extends SimpleApplication {
         terrain = (Node) getAssetManager().loadModel("Tracks/" + track + "/Terrains/terrain_1_node.j3o");
         terrainQuad = (TerrainQuad)terrain.getChild("terrain-terrain_1_node");
         // terrainQuad.getHeightMap();
+        rootNode.attachChild(terrain);
+    
+        sun = new DirectionalLight();
+        sun.setDirection(new Vector3f(-0.1f, -0.7f, -1).normalizeLocal());
+        rootNode.addLight(sun);
     }
     
     private void WriteHeightmapJme()    {
